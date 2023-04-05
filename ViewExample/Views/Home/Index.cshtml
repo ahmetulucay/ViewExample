@@ -1,0 +1,47 @@
+﻿@using ViewExample.Models
+@*Razor Code block (C# / html code here.)*@
+@{
+    string appTitle = "Asp.Net core [Demo App]";
+    Employee employee = new Employee()
+    {
+        Name = "John",
+        DateOfBirth = Convert.ToDateTime("2000-07-01"),
+        EmployeeGender = Gender.Male
+    };
+}
+@{
+    //local function
+    double? GetAge(DateTime? dateOfBirth)
+    {
+        if (dateOfBirth != null)
+            return Math.Round((DateTime.Now - dateOfBirth.Value).TotalDays / 365.25);
+        return null;
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@appTitle</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+    <h1>
+        Welcome        :<br />
+        -------------<br />
+        <h2>
+        Employee;<br /> 
+        Name= @employee.Name<br />
+            @if (employee.DateOfBirth != null)
+            {
+                <text>DateOfBirth= </text> @employee.DateOfBirth<br />
+                <span>Age= @employee.Name is @GetAge(employee.DateOfBirth) years old.</span>
+            }
+            else
+            {
+                <h4>Date of birth is null.</h4>
+            }
+        </h2>
+    </h1>
+    </body>
+</html>
